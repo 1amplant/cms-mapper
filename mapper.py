@@ -36,8 +36,21 @@ def chdir(path):
     finally:
         os.chdir(this_dir)
 
+def test_remote():
+    while not web_paths.empty():
+        path = web_paths.get()
+        url = f'{TARGET}{path}'
+        time.sleep(2)  # your target may have throttling/lockout.
+        r = requests.get(url)
+        if r.status_code == 200:
+            answers.put(url)
+            sys.stdout.write('+')
+        else:
+            sys.stdout.write('x')
+        sys.stdout.flush()
+        
 if __name__ == '__main__':
-    with chdir("/home/tim/Downloads/wordpress"):
+    with chdir("/home/kali/Downloads/wordpress"):
         gather_paths()
     input('Press return to continue.')
 
