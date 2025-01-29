@@ -64,3 +64,9 @@ if __name__ == '__main__':
         gather_paths()
     input('Press return to continue.')
 
+    run() 
+    with open('myanswers.txt', 'w') as f: 
+        while not answers.empty(): 
+            f.write(f'{answers.get()}\n') 
+    print('done')
+
