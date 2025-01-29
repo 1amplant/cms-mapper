@@ -48,7 +48,17 @@ def test_remote():
         else:
             sys.stdout.write('x')
         sys.stdout.flush()
-        
+
+def run(): 
+    mythreads = list() 
+    for i in range(THREADS): 
+        print(f'Spawning thread {i}') 
+        t = threading.Thread(target=test_remote) 
+        mythreads.append(t) 
+        t.start() 
+    for thread in mythreads: 
+        thread.join()
+
 if __name__ == '__main__':
     with chdir("/home/kali/Downloads/wordpress"):
         gather_paths()
